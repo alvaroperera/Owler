@@ -9,12 +9,15 @@ import FirebaseAuth
 
 class FirebaseAuthHelper {
     
-    func createUser(email: String, password: String, name: String, username: String, birthday: String) {
+    static func createUser(email: String, password: String, name: String, username: String, birthday: String) {
 
         Auth.auth().createUser(withEmail: email, password: password) { result, error in
             if let error = error {
                 print("Error al crear usuario: \(error.localizedDescription)")
                 return
+            }
+            else {
+                print("Usuario creado con éxito")
             }
             
             guard let user = result?.user else { return }

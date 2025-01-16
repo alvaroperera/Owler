@@ -10,6 +10,7 @@ import FirebaseFirestore
 struct User: Codable {
     @DocumentID var uid: String?
     var name: String
+    var username: String
     var email: String
     var birthday: String
     var followersNumber: Int?

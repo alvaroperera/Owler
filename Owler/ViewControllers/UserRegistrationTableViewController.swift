@@ -10,7 +10,9 @@ import FirebaseAuth
 import FirebaseFirestore
 
 class UserRegistrationTableViewController: UITableViewController {
-
+    
+    var tableFormData = [] as [Any]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
@@ -19,12 +21,33 @@ class UserRegistrationTableViewController: UITableViewController {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return 2
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return 3
+    }
+    
+    @IBAction func saveUser(_ sender: UIBarButtonItem) {
+        print("Prueba texto")
+        // Acceder a la celda "nombreCelda"
+            if let nombreCell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)),
+               nombreCell.reuseIdentifier == "nombreCelda" {
+                nombreCell.textLabel?.text = "Nombre: Álvaro"
+            }
+            
+            // Acceder a la celda "emailCelda"
+            if let emailCell = tableView.cellForRow(at: IndexPath(row: 1, section: 0)),
+               emailCell.reuseIdentifier == "emailCelda" {
+                emailCell.detailTextLabel?.text = "Correo: usuario@ejemplo.com"
+            }
+            
+            // Acceder a la celda "guardarCelda" en la sección 1
+            if let guardarCell = tableView.cellForRow(at: IndexPath(row: 0, section: 1)),
+               guardarCell.reuseIdentifier == "guardarCelda" {
+                guardarCell.textLabel?.text = "Guardar cambios"
+            }
     }
     
     func showAlert(message: String) {
@@ -34,7 +57,6 @@ class UserRegistrationTableViewController: UITableViewController {
     }
     
     func createUser(email: String, password: String, name: String) {
-        // Crear el usuario en Firebase Authentication
         
     }
 

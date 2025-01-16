@@ -8,11 +8,12 @@
 import FirebaseFirestore
 
 struct User: Codable {
-    @DocumentID var id: String?
+    @DocumentID var uid: String?
     var name: String
     var email: String
-    var followersNumber: Int
-    var followingNumber: Int
-    var postsNumber: Int
-    var createdAt: String
+    var birthday: String
+    var followersNumber: Int?
+    var followingNumber: Int?
+    var postsNumber: Int?
+    var createdAt: String?
 }

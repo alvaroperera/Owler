@@ -9,20 +9,19 @@ import FirebaseFirestore
 
 class FirestoreHelper {
     
+    static let db = Firestore.firestore()
+    
     static func addUser(user: User) {
         do {
-            let db = Firestore.firestore()
-            let documentData = try Firestore.Encoder().encode(user)
-            
-            db.collection("users").addDocument(data: documentData) { error in
+            try db.collection("users").document(user.uid!).setData(from: user) { error in
                 if let error = error {
-                    print("Error al guardar el usuario: \(error.localizedDescription)")
+                    print("Error al guardar datos del usuario en Firestore: \(error.localizedDescription)")
                 } else {
-                    print("Usuario guardado con éxito.")
+                    print("Usuario creado exitosamente en Firestore")
                 }
             }
         } catch {
-            print("Error al codificar el usuario: \(error.localizedDescription)")
+            print("Error al codificar datos del usuario: \(error.localizedDescription)")
         }
     }
 }

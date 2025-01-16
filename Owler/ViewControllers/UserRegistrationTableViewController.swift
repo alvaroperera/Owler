@@ -13,58 +13,34 @@ class UserRegistrationTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        tableView.dataSource = self
+        tableView.delegate = self
     }
     
-    func createUser(email: String, password: String, name: String) {
-        // Crear el usuario en Firebase Authentication
-        Auth.auth().createUser(withEmail: email, password: password) { result, error in
-            if let error = error {
-                print("Error al crear usuario: \(error.localizedDescription)")
-                return
-            }
-            
-            // El usuario se creó con éxito
-            guard let user = result?.user else { return }
-            
-            // Aquí se obtienen el UID y otros detalles para almacenarlos en Firestore
-            let uid = user.uid
-            let db = Firestore.firestore()
-            
-            // Crear un documento en Firestore con los datos del usuario
-            let userRef = db.collection("users").document(uid)
-            
-            userRef.setData([
-                "name": name,
-                "email": email,
-                "profilePicture": "",  // Puedes agregar la URL de la imagen si lo deseas
-                "createdAt": FieldValue.serverTimestamp()
-            ]) { error in
-                if let error = error {
-                    print("Error al crear usuario en Firestore: \(error.localizedDescription)")
-                } else {
-                    print("Usuario creado exitosamente en Firestore")
-                }
-            }
-        }
-    }
-
-    // MARK: - Table view data source
-
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return 0
     }
+    
+    func showAlert(message: String) {
+        let alert = UIAlertController(title: "Campos obligatorios", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func createUser(email: String, password: String, name: String) {
+        // Crear el usuario en Firebase Authentication
+        
+    }
+
+    // MARK: - Table view data source
+
+    
 
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

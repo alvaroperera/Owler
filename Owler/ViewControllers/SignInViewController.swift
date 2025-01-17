@@ -26,7 +26,7 @@ class SignInViewController: UIViewController, UIGestureRecognizerDelegate {
                 self.showLoginError(error: error)
             } else {
                 print("Sesión iniciada como: \(authResult?.user.email ?? "")")
-                // self.performSegue(withIdentifier: "goToMainMenu", sender: self)
+                self.performSegue(withIdentifier: "goToHome", sender: self)
             }
         }
     }

@@ -32,4 +32,10 @@ class FirebaseAuthHelper {
             FirestoreHelper.addUser(user: newUser)
         }
     }
+    
+    static func getCurrentUserUID() -> String? {
+        guard let user = Auth.auth().currentUser else { return nil }
+        
+        return user.uid
+    }
 }

@@ -295,7 +295,7 @@
         <!--Home-->
         <scene sceneID="f23-bJ-0IA">
             <objects>
-                <viewController title="HomeViewController" id="tjk-nF-8og" userLabel="Home" customClass="HomeViewController" customModule="Owler" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HomeViewController" title="HomeViewController" id="tjk-nF-8og" userLabel="Home" customClass="HomeViewController" customModule="Owler" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WFE-bR-aSa">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

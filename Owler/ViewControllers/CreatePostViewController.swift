@@ -35,13 +35,6 @@ class CreatePostViewController: UIViewController {
             publishedAt: dateString
         ))
         postTextView.text = "¿Qué te gustaría postear"
-        dismiss(animated: true) {
-            // Obtener el HomeViewController y llamar a la simulación de cambio de tab
-            if let homeVC = self.presentingViewController as? HomeViewController {
-                // Simulamos el cambio de tab y la recarga de datos
-                homeVC.simulateTabChange()
-                print("Modal cerrada, recargando datos en HomeViewController...")
-            }
-        }
+        dismiss(animated: true)
     }
 }

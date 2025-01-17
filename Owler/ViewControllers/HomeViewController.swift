@@ -11,12 +11,36 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     var items: [Post] = []
     
+    let refreshControl = UIRefreshControl()
+    
     @IBOutlet weak var postsListTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         postsListTableView.dataSource = self
         postsListTableView.delegate = self
+        
+        refreshControl.attributedTitle = NSAttributedString(string: "Tirando para recargar...") // Texto opcional
+        refreshControl.addTarget(self, action: #selector(reloadController), for: .valueChanged)
+        postsListTableView.refreshControl = refreshControl
+        
+        
+        loadData()
+    }
+    
+    @objc func reloadController() {
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
+            self?.refreshControl.endRefreshing()
+            
+            // Reinstancia el controlador actual
+            if let currentViewController = self?.storyboard?.instantiateViewController(withIdentifier: "HomeViewController") {
+                self?.navigationController?.setViewControllers([currentViewController], animated: false)
+            }
+        }
+    }
+    func reloadView() {
+        // Código de inicialización
         loadData()
     }
     
@@ -41,6 +65,10 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
             do {
                 self.items = try await FirestoreHelper.getPostsFromYourNetwork()
                 self.postsListTableView.reloadData()
+                
+                DispatchQueue.main.async {
+                    self.postsListTableView.reloadData()
+                }
             } catch {
                 print("Error al obtener los posts: \(error)")
             }

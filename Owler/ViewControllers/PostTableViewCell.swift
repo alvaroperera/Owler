@@ -26,6 +26,19 @@ class PostTableViewCell: UITableViewCell {
     }
     
     func fillCell(from post: Post) {
+        var currentUser : User?
+        let currentUserUid = FirebaseAuthHelper.getCurrentUserUID()
+        
+        Task(){
+            do {
+                currentUser = try await FirestoreHelper.getUserInfo(uid: currentUserUid! )
+                
+            } catch {
+                print("Error al obtener el usuario: \(error)")
+            }
+        }
+        authorNameLabel.text = currentUser?.name
+        authorUserNameLabel.text = "@\(currentUser?.username ?? "")"
         postPreviewTextView.text = post.postBody
     }
 }

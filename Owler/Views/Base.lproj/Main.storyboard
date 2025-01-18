@@ -321,20 +321,23 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="@Usuario" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IS0-zd-eNq">
-                                                    <rect key="frame" x="238" y="11" width="139" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@Usuario" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IS0-zd-eNq">
+                                                    <rect key="frame" x="237.99999999999997" y="11" width="78.666666666666657" height="21"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Nombre" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6sr-Fr-yjR">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nombre" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6sr-Fr-yjR">
                                                     <rect key="frame" x="94" y="11" width="93" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="93" id="lO5-O0-6Y4"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nhl-SZ-s4O">
-                                                    <rect key="frame" x="94" y="30" width="289" height="70"/>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nhl-SZ-s4O">
+                                                    <rect key="frame" x="94" y="30" width="291" height="134"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="291" id="5Ib-zW-HKY"/>
@@ -347,18 +350,19 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="bottomMargin" secondItem="O7E-DQ-a48" secondAttribute="bottom" constant="34" id="7K5-FS-C3Z"/>
-                                                <constraint firstItem="6sr-Fr-yjR" firstAttribute="top" secondItem="pmq-BV-Qt9" secondAttribute="topMargin" id="Dlw-Ed-1PR"/>
-                                                <constraint firstItem="6sr-Fr-yjR" firstAttribute="baseline" secondItem="IS0-zd-eNq" secondAttribute="baseline" id="K4w-ON-cYt"/>
-                                                <constraint firstItem="6sr-Fr-yjR" firstAttribute="top" secondItem="O7E-DQ-a48" secondAttribute="top" id="NUJ-dP-OZE"/>
+                                                <constraint firstItem="6sr-Fr-yjR" firstAttribute="leading" secondItem="pmq-BV-Qt9" secondAttribute="leading" constant="94" id="8ep-Me-HMi"/>
+                                                <constraint firstItem="nhl-SZ-s4O" firstAttribute="top" secondItem="pmq-BV-Qt9" secondAttribute="topMargin" constant="19" id="DMb-3T-D9O"/>
+                                                <constraint firstItem="6sr-Fr-yjR" firstAttribute="top" secondItem="pmq-BV-Qt9" secondAttribute="topMargin" id="GWd-oJ-ITa"/>
                                                 <constraint firstItem="O7E-DQ-a48" firstAttribute="leading" secondItem="pmq-BV-Qt9" secondAttribute="leadingMargin" id="OOY-V0-YU6"/>
-                                                <constraint firstItem="6sr-Fr-yjR" firstAttribute="leading" secondItem="pmq-BV-Qt9" secondAttribute="leading" constant="94" id="OQ6-At-xJz"/>
-                                                <constraint firstItem="nhl-SZ-s4O" firstAttribute="top" secondItem="6sr-Fr-yjR" secondAttribute="bottom" constant="2" id="PO1-8h-bD2"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="6sr-Fr-yjR" secondAttribute="bottom" constant="81" id="OXz-Sc-dIV"/>
+                                                <constraint firstItem="6sr-Fr-yjR" firstAttribute="leading" secondItem="nhl-SZ-s4O" secondAttribute="leading" id="TJI-yd-aUE"/>
                                                 <constraint firstItem="nhl-SZ-s4O" firstAttribute="leading" secondItem="O7E-DQ-a48" secondAttribute="trailing" constant="8" id="cFo-Jd-ktf"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="nhl-SZ-s4O" secondAttribute="bottom" constant="-51" id="dGC-OF-QZT"/>
+                                                <constraint firstItem="6sr-Fr-yjR" firstAttribute="baseline" secondItem="IS0-zd-eNq" secondAttribute="baseline" id="ejD-kO-P0r"/>
+                                                <constraint firstItem="IS0-zd-eNq" firstAttribute="leading" secondItem="6sr-Fr-yjR" secondAttribute="trailing" constant="51" id="epz-9D-sP4"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="IS0-zd-eNq" secondAttribute="trailing" constant="20" symbolic="YES" id="gSK-0p-EuD"/>
-                                                <constraint firstItem="6sr-Fr-yjR" firstAttribute="leading" secondItem="O7E-DQ-a48" secondAttribute="trailing" constant="8" id="k3F-yr-PLx"/>
-                                                <constraint firstItem="6sr-Fr-yjR" firstAttribute="leading" secondItem="nhl-SZ-s4O" secondAttribute="leading" id="t46-wi-kix"/>
-                                                <constraint firstItem="IS0-zd-eNq" firstAttribute="leading" secondItem="6sr-Fr-yjR" secondAttribute="trailing" constant="36" id="zla-gn-Jsn"/>
+                                                <constraint firstItem="6sr-Fr-yjR" firstAttribute="firstBaseline" secondItem="IS0-zd-eNq" secondAttribute="firstBaseline" id="gSk-oX-Mwq"/>
+                                                <constraint firstItem="6sr-Fr-yjR" firstAttribute="top" secondItem="O7E-DQ-a48" secondAttribute="top" id="i6y-jE-hnb"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>

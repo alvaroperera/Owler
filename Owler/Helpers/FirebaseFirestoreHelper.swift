@@ -42,7 +42,6 @@ class FirestoreHelper {
     }
     
     static func getPostsFromYourNetwork() async throws -> [Post] {
-        let db = Firestore.firestore()
         var items: [Post] = []
 
         // Usamos Firestore con async/await
@@ -58,5 +57,20 @@ class FirestoreHelper {
         }
 
         return items
+    }
+    
+    static func getUserInfo(uid: String) async throws -> User {
+        var user: User?
+        
+        let snapshot = try await db.collection("users").document(uid).getDocument()
+        
+        do {
+            user = try snapshot.data(as: User.self)
+        } catch {
+            print("Error al decodificar los datos: \(error)")
+            throw error
+        }
+
+        return user!
     }
 }

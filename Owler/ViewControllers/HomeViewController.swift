@@ -20,7 +20,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         postsListTableView.dataSource = self
         postsListTableView.delegate = self
         
-        refreshControl.attributedTitle = NSAttributedString(string: "Tirando para recargar...") // Texto opcional
+        refreshControl.attributedTitle = NSAttributedString(string: "Recargando publicaciones...") // Texto opcional
         refreshControl.addTarget(self, action: #selector(reloadController), for: .valueChanged)
         postsListTableView.refreshControl = refreshControl
         
@@ -46,7 +46,6 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print("Will Appear")
         loadData()
     }
     
@@ -73,14 +72,5 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 print("Error al obtener los posts: \(error)")
             }
         }
-    }
-    
-    func simulateTabChange() {
-        // Forzamos la ejecución del método viewWillAppear como si fuera un cambio de tab
-        print("Pruebis")
-        self.viewWillAppear(true) // Simula el comportamiento de un cambio de tab
-        
-        // Si también deseas llamar a viewDidAppear, puedes hacerlo también
-        self.viewDidAppear(true)
     }
 }

@@ -14,6 +14,8 @@ class PostTableViewCell: UITableViewCell {
     @IBOutlet weak var postPreviewTextView: UITextView!
     @IBOutlet weak var authorUserNameLabel: UILabel!
     
+    var author : User?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -26,19 +28,20 @@ class PostTableViewCell: UITableViewCell {
     }
     
     func fillCell(from post: Post) {
-        var currentUser : User?
-        let currentUserUid = FirebaseAuthHelper.getCurrentUserUID()
+        
         
         Task(){
             do {
-                currentUser = try await FirestoreHelper.getUserInfo(uid: currentUserUid! )
+                self.author = try await FirestoreHelper.getUserInfo(uid: post.authorUid )
                 
+                DispatchQueue.main.async { [self] in
+                    authorNameLabel.text = author?.name
+                    authorUserNameLabel.text = "@\(author?.username ?? "")"
+                }
             } catch {
                 print("Error al obtener el usuario: \(error)")
             }
         }
-        authorNameLabel.text = currentUser?.name
-        authorUserNameLabel.text = "@\(currentUser?.username ?? "")"
         postPreviewTextView.text = post.postBody
     }
 }

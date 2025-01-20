@@ -6,7 +6,7 @@
 //
 import UIKit
 
-class CreatePostViewController: UIViewController {
+class CreatePostViewController: UIViewController, UITextViewDelegate {
     
     var currentUser: User?
     
@@ -15,11 +15,18 @@ class CreatePostViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        postTextView.delegate = self
         // Do any additional setup after loading the view.
     }
     
     @IBAction func cancelPost(_ sender: Any) {
+        postTextView.text = "¿Qué te gustaría postear"
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    func textViewDidBeginEditing(_ postTextView: UITextView) {
+        postTextView.text.removeAll()
+        // Aquí puedes ejecutar el código que desees.
     }
     
     @IBAction func createPost(_ sender: UIButton) {

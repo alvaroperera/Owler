@@ -56,13 +56,12 @@ class UserRegistrationTableViewController: UITableViewController {
                 return
             }
             
-            print("Email: \(email), Password: \(password) Name: \(name), Username: \(username), Fecha: \(birthday)")
-            
             let formatter = DateFormatter()
             formatter.dateFormat = "yyyy-MM-dd"
             let dateString = formatter.string(from: birthday)
             
             FirebaseAuthHelper.createUser(email: email, password: password, name: name, username: username, birthday: dateString)
+            self.navigationController?.popViewController(animated: true)
         }
     }
     

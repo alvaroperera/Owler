@@ -66,6 +66,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 self.postsListTableView.reloadData()
                 
                 DispatchQueue.main.async {
+                    
                     self.postsListTableView.reloadData()
                 }
             } catch {
@@ -73,4 +74,13 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
             }
         }
     }
-}
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+            if segue.identifier == "goToPostDetail" {
+                if let indexPath = self.postsListTableView.indexPathForSelectedRow {
+                    let post = items[indexPath.row]
+                    let destinationVC = segue.destination as? PostDetailViewController
+                    destinationVC!.post = post }
+            }
+        }
+    }

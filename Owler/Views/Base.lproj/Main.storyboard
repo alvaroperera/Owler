@@ -388,9 +388,10 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nhl-SZ-s4O">
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" editable="NO" id="nhl-SZ-s4O">
                                                     <rect key="frame" x="94" y="30" width="291" height="134"/>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="291" id="5Ib-zW-HKY"/>
                                                     </constraints>
@@ -417,6 +418,7 @@
                                             <outlet property="authorNameLabel" destination="6sr-Fr-yjR" id="PCa-hA-J1h"/>
                                             <outlet property="authorProfilePicImageView" destination="O7E-DQ-a48" id="BgA-qa-wjj"/>
                                             <outlet property="postPreviewTextView" destination="nhl-SZ-s4O" id="25k-Jh-Qal"/>
+                                            <segue destination="Jqh-h0-BNb" kind="show" identifier="goToPostDetail" id="VI8-bA-ea4"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

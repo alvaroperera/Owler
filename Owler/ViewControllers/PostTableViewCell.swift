@@ -30,18 +30,28 @@ class PostTableViewCell: UITableViewCell {
     func fillCell(from post: Post) {
         
         
-        Task(){
+        Task {
             do {
                 self.author = try await FirestoreHelper.getUserInfo(uid: post.authorUid )
                 
                 DispatchQueue.main.async { [self] in
-                    authorNameLabel.text = author?.name
-                    authorUserNameLabel.text = "@\(author?.username ?? "")"
+                    let authorInfoString = "\(author!.name) @\(author!.username)"
+                    let attributedString = NSMutableAttributedString(string: authorInfoString)
+                    
+                    let boldFont = UIFont.boldSystemFont(ofSize: authorNameLabel.font.pointSize)
+                    let boldAttributes: [NSAttributedString.Key: Any] = [
+                        .font: boldFont
+                    ]
+                    if let boldRange = authorInfoString.range(of: author!.name) {
+                        let nsRange = NSRange(boldRange, in: authorInfoString)
+                        attributedString.addAttributes(boldAttributes, range: nsRange)
+                    }
+                    authorNameLabel.attributedText = attributedString
+                    postPreviewTextView.text = post.postBody
                 }
             } catch {
                 print("Error al obtener el usuario: \(error)")
             }
         }
-        postPreviewTextView.text = post.postBody
     }
 }

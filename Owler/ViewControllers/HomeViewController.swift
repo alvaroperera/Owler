@@ -25,7 +25,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         postsListTableView.refreshControl = refreshControl
         
         
-        loadData()
+       //  loadData()
     }
     
     @objc func reloadController() {
@@ -60,13 +60,10 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func loadData() {
-        Task() {
+        Task{
             do {
                 self.items = try await FirestoreHelper.getPostsFromYourNetwork()
-                self.postsListTableView.reloadData()
-                
                 DispatchQueue.main.async {
-                    
                     self.postsListTableView.reloadData()
                 }
             } catch {

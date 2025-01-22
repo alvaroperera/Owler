@@ -64,4 +64,12 @@ class MyProfileViewController: UIViewController, UITableViewDataSource, UITableV
             }
         }
     }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToPostDetailFromMyProfile" {
+            if let indexPath = self.myPostListTableView.indexPathForSelectedRow {
+                let post = myPostItems[indexPath.row]
+                let destinationVC = segue.destination as? PostDetailViewController
+                destinationVC!.post = post }
+        }
+    }
 }

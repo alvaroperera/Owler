@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MyProfileViewController: UIViewController {
+class MyProfileViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var myName: UILabel!
     @IBOutlet weak var myUsername: UILabel!
@@ -16,12 +16,16 @@ class MyProfileViewController: UIViewController {
     @IBOutlet weak var myFollowersNumber: UILabel!
     @IBOutlet weak var myFollowingNumber: UILabel!
     @IBOutlet weak var myProfileImage: UIImageView!
+    @IBOutlet weak var myPostListTableView: UITableView!
     
+    var myPostItems: [Post] = []
     var myUser: User?
     var myPosts: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        myPostListTableView.dataSource = self
+        myPostListTableView.delegate = self
         loadMyProfileData()
     }
     
@@ -30,11 +34,22 @@ class MyProfileViewController: UIViewController {
         loadMyProfileData()
     }
     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return myPostItems.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MyCell", for: indexPath) as! PostTableViewCell
+        cell.fillCell(from: self.myPostItems[indexPath.row])
+        return cell
+    }
+    
     func loadMyProfileData() {
         Task {
             do {
                 self.myUser = try await FirebaseFirestoreHelper.getUserInfo(uid: FirebaseAuthHelper.getCurrentUserUID()! )
                 self.myPosts = try await FirebaseFirestoreHelper.getMyNumberOfPosts(uid: FirebaseAuthHelper.getCurrentUserUID()!)
+                self.myPostItems = try await FirebaseFirestoreHelper.getMyPosts()
                 DispatchQueue.main.async { [self] in
                     myName.text = myUser?.name
                     myUsername.text = "@\(myUser!.username)"
@@ -42,6 +57,7 @@ class MyProfileViewController: UIViewController {
                     myPostsNumber.text = "\(myPosts ?? 0)"
                     myFollowersNumber.text = "\(myUser!.followersNumber ?? 0)"
                     myFollowingNumber.text = "\(myUser!.followingNumber ?? 0)"
+                    self.myPostListTableView.reloadData()
                 }
             } catch {
                 print("Error al obtener el usuario: \(error)")

@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseAuth
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -13,10 +15,31 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let _ = (scene as? UIWindowScene) else { return }
+            // Asegúrate de que el UIScene se pueda convertir a UIWindowScene
+            guard let windowScene = (scene as? UIWindowScene) else { return }
+
+            // Inicializa Firebase (si no lo has hecho en AppDelegate)
+            FirebaseApp.configure()
+
+            // Crea una nueva instancia de UIWindow con windowScene
+            window = UIWindow(windowScene: windowScene)
+
+            // Comprobar si hay un usuario autenticado
+            if Auth.auth().currentUser != nil {
+                // Usuario autenticado: cargar pantalla principal
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let homeVC = storyboard.instantiateViewController(withIdentifier: "HomeTabsViewController")
+                window?.rootViewController = homeVC
+            } else {
+                // Usuario no autenticado: cargar pantalla de inicio de sesión
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let loginVC = storyboard.instantiateViewController(withIdentifier: "LogInViewController")
+                window?.rootViewController = loginVC
+            }
+
+            // Asegúrate de que la ventana sea visible
+            window?.makeKeyAndVisible()
+        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -48,5 +71,5 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
 
-}
+
 

@@ -13,6 +13,7 @@ struct User: Codable {
     var username: String
     var email: String
     var birthday: String
+    var biography: String?
     var followersNumber: Int?
     var followingNumber: Int?
     var postsNumber: Int?

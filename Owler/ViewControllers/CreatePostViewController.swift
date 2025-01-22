@@ -9,6 +9,7 @@ import UIKit
 class CreatePostViewController: UIViewController, UITextViewDelegate {
     
     var currentUser: User?
+    var previewPostText: String = "¿Qué tal va todo?"
     
     @IBOutlet weak var userProfileImg: UIImageView!
     @IBOutlet weak var postTextView: UITextView!
@@ -20,13 +21,12 @@ class CreatePostViewController: UIViewController, UITextViewDelegate {
     }
     
     @IBAction func cancelPost(_ sender: Any) {
-        postTextView.text = "¿Qué te gustaría postear"
+        postTextView.text = previewPostText
         self.dismiss(animated: true, completion: nil)
     }
     
     func textViewDidBeginEditing(_ postTextView: UITextView) {
         postTextView.text.removeAll()
-        // Aquí puedes ejecutar el código que desees.
     }
     
     @IBAction func createPost(_ sender: UIButton) {
@@ -36,12 +36,12 @@ class CreatePostViewController: UIViewController, UITextViewDelegate {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         let dateString = formatter.string(from: currentDate)
-        FirestoreHelper.addPost(post: Post(
+        FirebaseFirestoreHelper.addPost(post: Post(
             postBody: postTextView.text,
             authorUid: currentUserUid!,
             publishedAt: dateString
         ))
-        postTextView.text = "¿Qué te gustaría postear"
+        postTextView.text = previewPostText
         dismiss(animated: true)
     }
 }

@@ -7,7 +7,7 @@
 
 import FirebaseFirestore
 
-class FirestoreHelper {
+class FirebaseFirestoreHelper {
     
     static let db = Firestore.firestore()
     
@@ -43,19 +43,65 @@ class FirestoreHelper {
     
     static func getPostsFromYourNetwork() async throws -> [Post] {
         var items: [Post] = []
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss" // Formato de la fecha
 
-        // Usamos Firestore con async/await
         let snapshot = try await db.collection("posts").getDocuments()
-        
+
         do {
             items = try snapshot.documents.compactMap { document in
                 try document.data(as: Post.self) // Decodifica los documentos a `Post`
+            }
+
+            // Ordena los items por la fecha publicada
+            items.sort { post1, post2 in
+                guard
+                    let date1 = dateFormatter.date(from: post1.publishedAt),
+                    let date2 = dateFormatter.date(from: post2.publishedAt)
+                else {
+                    return false // No cambiar el orden si alguna fecha es inválida
+                }
+                return date1 > date2 // Orden ascendente (de más antigua a más reciente)
             }
         } catch {
             print("Error al decodificar los datos: \(error)")
             throw error
         }
 
+        return items
+    }
+    
+    static func getMyNumberOfPosts(uid: String) async throws -> Int {
+        let snapshot = try await db.collection("posts").whereField("authorUid", isEqualTo: uid).getDocuments()
+        return snapshot.count
+    }
+    
+    static func getMyPosts() async throws -> [Post] {
+        var items: [Post] = []
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss" // Formato de la fecha
+        
+        
+        let snapshot = try await db.collection("posts").whereField("authorUid", isEqualTo: FirebaseAuthHelper.getCurrentUserUID()!).getDocuments()
+        
+        do {
+            items = try snapshot.documents.compactMap { document in
+                try document.data(as: Post.self) // Decodifica los documentos a `Post`
+            }
+            
+            items.sort { post1, post2 in
+                guard
+                    let date1 = dateFormatter.date(from: post1.publishedAt),
+                    let date2 = dateFormatter.date(from: post2.publishedAt)
+                else {
+                    return false // No cambiar el orden si alguna fecha es inválida
+                }
+                return date1 > date2 // Orden ascendente (de más antigua a más reciente)
+            }
+        } catch {
+            print("Error al decodificar los datos: \(error)")
+            throw error
+        }
         return items
     }
     

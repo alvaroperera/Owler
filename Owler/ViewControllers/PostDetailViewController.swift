@@ -25,7 +25,7 @@ class PostDetailViewController: UIViewController {
     func loadData() {
         Task(){
             do {
-                self.author = try await FirestoreHelper.getUserInfo(uid: post!.authorUid )
+                self.author = try await FirebaseFirestoreHelper.getUserInfo(uid: post!.authorUid )
                 
                 DispatchQueue.main.async { [self] in
                     authorNameLabell.text = author?.name

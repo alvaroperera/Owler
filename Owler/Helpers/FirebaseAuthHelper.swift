@@ -29,7 +29,7 @@ class FirebaseAuthHelper {
                 email: email,
                 birthday: birthday
             )
-            FirestoreHelper.addUser(user: newUser)
+            FirebaseFirestoreHelper.addUser(user: newUser)
         }
     }
     

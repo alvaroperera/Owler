@@ -62,7 +62,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func loadData() {
         Task{
             do {
-                self.items = try await FirestoreHelper.getPostsFromYourNetwork()
+                self.items = try await FirebaseFirestoreHelper.getPostsFromYourNetwork()
                 DispatchQueue.main.async {
                     self.postsListTableView.reloadData()
                 }

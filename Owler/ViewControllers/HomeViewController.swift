@@ -66,10 +66,19 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     @objc func imageTapped(_ sender: UITapGestureRecognizer) {
         if let imageView = sender.view as? UIImageView {
-            let indexPathRow = imageView.tag // El índice de la celda (usado en cellForRowAt)
-            let post = items[indexPathRow]// Obtener el dato correspondiente
-            performSegue(withIdentifier: "goToAuthorProfile", sender: post.authorUid)
+            let indexPathRow = imageView.tag
+            let post = items[indexPathRow]
+            let currentUserUID = FirebaseAuthHelper.getCurrentUserUID()!
+            if currentUserUID != post.authorUid {
+                performSegue(withIdentifier: "goToAuthorProfile", sender: post.authorUid)
             }
+            else {
+                if let tabBarController = self.tabBarController {
+                    tabBarController.selectedIndex = 1
+                }
+            }
+            
+        }
     }
     
     
@@ -93,6 +102,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 let destinationVC = segue.destination as? PostDetailViewController
                 destinationVC!.post = post }
         }
+        
         if segue.identifier == "goToAuthorProfile",
            let destinationVC = segue.destination as? ProfileViewController,
            let data = sender as? String { // Cambia el tipo si estás pasando un objeto más complejo

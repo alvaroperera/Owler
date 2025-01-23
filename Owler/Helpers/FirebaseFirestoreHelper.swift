@@ -41,6 +41,43 @@ class FirebaseFirestoreHelper {
         }
     }
     
+    static func addFollow(follow: Follow) {
+        do {
+            let documentData = try Firestore.Encoder().encode(follow)
+                    
+            db.collection("follows").addDocument(data: documentData) { error in
+                if let error = error {
+                    print("Error al guardar el post: \(error.localizedDescription)")
+                } else {
+                    print("Follow guardado con éxito.")
+                }
+            }
+        } catch {
+            print("Error al codificar el follow: \(error.localizedDescription)")
+        }
+    }
+    
+    static func removeFollow(uid: String, followedUid: String) async throws {
+        do {
+            let querySnapshot = try await db.collection("follows")
+                .whereField("uid", isEqualTo: uid)
+                .whereField("userFollowedID", isEqualTo: followedUid)
+                .getDocuments()
+            
+            guard !querySnapshot.documents.isEmpty else {
+                print("No se encontraron documentos para eliminar.")
+                return
+            }
+            for document in querySnapshot.documents {
+                try await document.reference.delete()
+                print("Documento eliminado correctamente: \(document.documentID)")
+            }
+            } catch {
+                print("Error al eliminar el documento: \(error.localizedDescription)")
+                throw error
+            }
+    }
+    
     static func getPostsFromYourNetwork() async throws -> [Post] {
         var items: [Post] = []
         let dateFormatter = DateFormatter()
@@ -74,6 +111,38 @@ class FirebaseFirestoreHelper {
     static func getNumberOfPosts(uid: String) async throws -> Int {
         let snapshot = try await db.collection("posts").whereField("authorUid", isEqualTo: uid).getDocuments()
         return snapshot.count
+    }
+    
+    static func getNumberOfFollows(uid: String) async throws -> Int {
+        let snapshot = try await db.collection("follows").whereField("userUid", isEqualTo: uid).getDocuments()
+        return snapshot.count
+    }
+    
+    static func getNumberOfFollowers(uid: String) async throws -> Int {
+        let snapshot = try await db.collection("followers").whereField("userUid", isEqualTo: uid).getDocuments()
+        return snapshot.count
+    }
+    
+    static func getFollowsFromUser(uid: String) async throws -> [Follow] {
+        var items: [Follow] = []
+        
+        let snapshot = try await db.collection("follows").whereField("userUid", isEqualTo: uid).getDocuments()
+        
+        do {
+            items = try snapshot.documents.compactMap { document in
+                try document.data(as: Follow.self)
+            } 
+        } catch {
+            print("Error al decodificar los datos: \(error)")
+            throw error
+        }
+        return items
+    }
+    
+    static func isFollowingUser(uid: String, followedUid: String) async throws -> Bool {
+        let snapshot = try await db.collection("follows").whereField("userUid", isEqualTo: uid).whereField("userFollowedID", isEqualTo: followedUid).getDocuments()
+        
+        return snapshot.count > 0
     }
     
     static func getPostsFromUser(uid: String) async throws -> [Post] {

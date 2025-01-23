@@ -475,7 +475,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bch-lf-sWG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-779" y="3424"/>
+            <point key="canvasLocation" x="-779" y="3426"/>
         </scene>
         <!--Create Post-->
         <scene sceneID="7tb-tN-tUC">
@@ -1073,6 +1073,9 @@
                                 <buttonConfiguration key="configuration" style="tinted" title=" Seguir" cornerStyle="capsule">
                                     <imageReference key="image" image="person.fill.badge.plus" catalog="system" symbolScale="small"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="followOrUnfollow:" destination="D0Y-YD-uK8" eventType="touchUpInside" id="4c1-dr-zbR"/>
+                                </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" image="birthday.cake.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="zcW-cE-RIP">
                                 <rect key="frame" x="144" y="200.66666666666652" width="15" height="15"/>
@@ -1113,7 +1116,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WCG-v1-a0u" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1576" y="3424"/>
+            <point key="canvasLocation" x="-1576" y="3425"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

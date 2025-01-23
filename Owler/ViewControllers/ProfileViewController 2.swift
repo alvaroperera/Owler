@@ -18,10 +18,14 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     @IBOutlet weak var userFollowersNumber: UILabel!
     @IBOutlet weak var userFollowingNumber: UILabel!
     
+    
     var userPostItems: [Post] = []
     var userUid: String?
     var user: User?
     var userPosts: Int?
+    var userFollows: Int?
+    var userFollowers: Int?
+    var isFollow: Bool?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,13 +49,37 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         return cell
     }
     
+    @IBAction func followOrUnfollow(_ sender: UIButton) {
+        print(self.isFollow as Any)
+        if (self.isFollow ?? false == false ){
+            FirebaseFirestoreHelper.addFollow(follow: Follow(
+                userID: FirebaseAuthHelper.getCurrentUserUID()!,
+                userFollowedID: self.userUid!))
+            self.isFollow = true
+            
+        }
+        else {
+            Task {
+                do {
+                    try await FirebaseFirestoreHelper.removeFollow(uid: FirebaseAuthHelper.getCurrentUserUID()!, followedUid: self.userUid!)
+                } catch {
+                    print("Error al eliminar el documento: \(error.localizedDescription)")
+                }
+            }
+        }
+        loadUserProfileData()
+    }
+    
     func loadUserProfileData() {
         Task {
             do {
-                print(self.userUid!)
                 self.user = try await FirebaseFirestoreHelper.getUserInfo(uid: self.userUid! )
                 self.userPosts = try await FirebaseFirestoreHelper.getNumberOfPosts(uid: self.userUid!)
+                self.userFollows = try await FirebaseFirestoreHelper.getNumberOfFollows(uid: self.userUid!)
+                self.userFollowers = try await FirebaseFirestoreHelper.getNumberOfFollowers(uid: self.userUid!)
                 self.userPostItems = try await FirebaseFirestoreHelper.getPostsFromUser(uid: self.userUid!)
+                self.isFollow = try await FirebaseFirestoreHelper.isFollowingUser(uid: FirebaseAuthHelper.getCurrentUserUID()!, followedUid: self.userUid!)
+                print(self.isFollow as Any)
                 DispatchQueue.main.async { [self] in
                     userName.text = user?.name
                     userUserName.text = "@\(user!.username)"

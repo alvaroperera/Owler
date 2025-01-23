@@ -12,7 +12,6 @@ class PostTableViewCell: UITableViewCell {
     @IBOutlet weak var authorProfilePicImageView: UIImageView!
     @IBOutlet weak var authorNameLabel: UILabel!
     @IBOutlet weak var postPreviewTextView: UITextView!
-    @IBOutlet weak var authorUserNameLabel: UILabel!
     
     var author : User?
     

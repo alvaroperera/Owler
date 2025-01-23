@@ -48,8 +48,8 @@ class MyProfileViewController: UIViewController, UITableViewDataSource, UITableV
         Task {
             do {
                 self.myUser = try await FirebaseFirestoreHelper.getUserInfo(uid: FirebaseAuthHelper.getCurrentUserUID()! )
-                self.myPosts = try await FirebaseFirestoreHelper.getMyNumberOfPosts(uid: FirebaseAuthHelper.getCurrentUserUID()!)
-                self.myPostItems = try await FirebaseFirestoreHelper.getMyPosts()
+                self.myPosts = try await FirebaseFirestoreHelper.getNumberOfPosts(uid: FirebaseAuthHelper.getCurrentUserUID()!)
+                self.myPostItems = try await FirebaseFirestoreHelper.getPostsFromUser(uid: FirebaseAuthHelper.getCurrentUserUID()!)
                 DispatchQueue.main.async { [self] in
                     myName.text = myUser?.name
                     myUsername.text = "@\(myUser!.username)"

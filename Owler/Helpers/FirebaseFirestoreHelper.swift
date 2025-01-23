@@ -71,18 +71,18 @@ class FirebaseFirestoreHelper {
         return items
     }
     
-    static func getMyNumberOfPosts(uid: String) async throws -> Int {
+    static func getNumberOfPosts(uid: String) async throws -> Int {
         let snapshot = try await db.collection("posts").whereField("authorUid", isEqualTo: uid).getDocuments()
         return snapshot.count
     }
     
-    static func getMyPosts() async throws -> [Post] {
+    static func getPostsFromUser(uid: String) async throws -> [Post] {
         var items: [Post] = []
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss" // Formato de la fecha
         
         
-        let snapshot = try await db.collection("posts").whereField("authorUid", isEqualTo: FirebaseAuthHelper.getCurrentUserUID()!).getDocuments()
+        let snapshot = try await db.collection("posts").whereField("authorUid", isEqualTo: uid).getDocuments()
         
         do {
             items = try snapshot.documents.compactMap { document in

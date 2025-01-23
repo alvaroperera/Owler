@@ -25,7 +25,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         postsListTableView.refreshControl = refreshControl
         
         
-       //  loadData()
+        //  loadData()
     }
     
     @objc func reloadController() {
@@ -56,8 +56,22 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! PostTableViewCell
         cell.fillCell(from: self.items[indexPath.row])
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(imageTapped(_:)))
+        cell.authorProfilePicImageView.addGestureRecognizer(tapGesture)
+        cell.authorProfilePicImageView.isUserInteractionEnabled = true
+        cell.authorProfilePicImageView.tag = indexPath.row // Usa el tag para identificar la celda
         return cell
     }
+    
+    @objc func imageTapped(_ sender: UITapGestureRecognizer) {
+        if let imageView = sender.view as? UIImageView {
+            let indexPathRow = imageView.tag // El índice de la celda (usado en cellForRowAt)
+            let post = items[indexPathRow]// Obtener el dato correspondiente
+            performSegue(withIdentifier: "goToAuthorProfile", sender: post.authorUid)
+            }
+    }
+    
     
     func loadData() {
         Task{
@@ -73,11 +87,16 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-            if segue.identifier == "goToPostDetail" {
-                if let indexPath = self.postsListTableView.indexPathForSelectedRow {
-                    let post = items[indexPath.row]
-                    let destinationVC = segue.destination as? PostDetailViewController
-                    destinationVC!.post = post }
-            }
+        if segue.identifier == "goToPostDetail" {
+            if let indexPath = self.postsListTableView.indexPathForSelectedRow {
+                let post = items[indexPath.row]
+                let destinationVC = segue.destination as? PostDetailViewController
+                destinationVC!.post = post }
+        }
+        if segue.identifier == "goToAuthorProfile",
+           let destinationVC = segue.destination as? ProfileViewController,
+           let data = sender as? String { // Cambia el tipo si estás pasando un objeto más complejo
+            destinationVC.userUid = data
         }
     }
+}

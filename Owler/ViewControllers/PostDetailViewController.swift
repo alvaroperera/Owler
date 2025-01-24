@@ -38,6 +38,11 @@ class PostDetailViewController: UIViewController {
                 DispatchQueue.main.async { [self] in
                     authorNameLabell.text = author?.name
                     authorUsernameLabel.text = "@\(author?.username ?? "")"
+                    if(author?.profileImageURL != nil){
+                        ImagesManagerHelper.loadImageFrom(url: author!.profileImageURL!, imageView: self.authorProfileImageView)
+                    } else {
+                        ImagesManagerHelper.loadImageFrom(url: URL(string: "https://firebasestorage.googleapis.com/v0/b/owlerapp-5969b.firebasestorage.app/o/user_profiles%2Fundefined%2FprofileImage.png?alt=media&token=586d28fe-e593-45ef-9b0d-60f1be89ce08")!, imageView: self.authorProfileImageView)
+                    }
                 }
             } catch {
                 print("Error al obtener el usuario: \(error)")

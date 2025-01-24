@@ -580,7 +580,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="@JohnDoe1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5da-0a-BaC">
-                                <rect key="frame" x="140" y="179" width="62" height="14"/>
+                                <rect key="frame" x="140" y="179" width="129" height="14"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <nil key="textColor"/>
@@ -741,7 +741,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ypb-7X-AhE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="221" y="2689"/>
+            <point key="canvasLocation" x="220.61068702290075" y="2688.7323943661972"/>
         </scene>
         <!--Edit Profile-->
         <scene sceneID="pNl-yK-rdn">
@@ -761,15 +761,19 @@
                                             <rect key="frame" x="0.0" y="0.0" width="393" height="118"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="voA-PY-cWw">
+                                                <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="voA-PY-cWw">
                                                     <rect key="frame" x="146" y="9" width="100" height="100"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" systemColor="linkColor"/>
+                                                    <gestureRecognizers/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                             <integer key="value" value="50"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <outletCollection property="gestureRecognizers" destination="dfm-n5-HaV" appends="YES" id="2Ah-cu-NXe"/>
+                                                    </connections>
                                                 </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -936,6 +940,11 @@
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Krk-0m-AzF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="dfm-n5-HaV">
+                    <connections>
+                        <action selector="changeProfileImage:" destination="wMC-qX-2B3" id="bRR-8e-tRR"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="970" y="2689"/>
         </scene>
@@ -965,7 +974,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="@JohnDoe1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vxl-IS-oSp">
-                                <rect key="frame" x="140" y="179" width="62" height="14"/>
+                                <rect key="frame" x="140" y="179" width="125" height="14"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <nil key="textColor"/>
@@ -1123,16 +1132,17 @@
                         <outlet property="userName" destination="YqU-B8-cmd" id="QOD-mg-ZXc"/>
                         <outlet property="userPostListTableView" destination="rrz-ZE-hdD" id="y0g-QA-pq8"/>
                         <outlet property="userPostsNumber" destination="R13-ok-Dds" id="Ydm-4x-fPX"/>
+                        <outlet property="userProfileImage" destination="RPz-af-SJj" id="Oje-bJ-OL3"/>
                         <outlet property="userUserName" destination="vxl-IS-oSp" id="0Vc-D5-N6s"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WCG-v1-a0u" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1576" y="3425"/>
+            <point key="canvasLocation" x="-1576.3358778625955" y="3424.6478873239439"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="VI8-bA-ea4"/>
+        <segue reference="qXc-Ov-opA"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="OwlerLogoDef" width="1024" height="1024"/>

@@ -17,6 +17,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     @IBOutlet weak var userPostsNumber: UILabel!
     @IBOutlet weak var userFollowersNumber: UILabel!
     @IBOutlet weak var userFollowingNumber: UILabel!
+    @IBOutlet weak var userProfileImage: UIImageView!
     
     
     var userPostItems: [Post] = []
@@ -86,6 +87,11 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
                     userPostsNumber.text = "\(userPosts ?? 0)"
                     userFollowersNumber.text = "\(user!.followersNumber ?? 0)"
                     userFollowingNumber.text = "\(user!.followingNumber ?? 0)"
+                    if(user?.profileImageURL != nil){
+                        ImagesManagerHelper.loadImageFrom(url: user!.profileImageURL!, imageView: self.userProfileImage)
+                    } else {
+                        ImagesManagerHelper.loadImageFrom(url: URL(string: "https://firebasestorage.googleapis.com/v0/b/owlerapp-5969b.firebasestorage.app/o/user_profiles%2Fundefined%2FprofileImage.png?alt=media&token=586d28fe-e593-45ef-9b0d-60f1be89ce08")!, imageView: self.userProfileImage)
+                    }
                     self.userPostListTableView.reloadData()
                 }
             } catch {

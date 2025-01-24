@@ -18,4 +18,5 @@ struct User: Codable {
     var followingNumber: Int?
     var postsNumber: Int?
     var createdAt: String?
+    var profileImageURL: URL?
 }

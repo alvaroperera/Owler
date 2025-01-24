@@ -188,4 +188,16 @@ class FirebaseFirestoreHelper {
 
         return user!
     }
+    
+    static func saveProfileImageURL(url: String) {
+        guard let userID = FirebaseAuthHelper.getCurrentUserUID() else { return }
+        
+        db.collection("users").document(userID).updateData(["profileImageURL": url]) { error in
+            if let error = error {
+                print("Error al guardar la URL de la imagen: \(error.localizedDescription)")
+            } else {
+                print("URL de la imagen guardada correctamente en Firestore")
+            }
+        }
+    }
 }

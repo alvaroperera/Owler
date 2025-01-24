@@ -56,6 +56,11 @@ class MyProfileViewController: UIViewController, UITableViewDataSource, UITableV
                     myPostsNumber.text = "\(myPosts ?? 0)"
                     myFollowersNumber.text = "\(myUser!.followersNumber ?? 0)"
                     myFollowingNumber.text = "\(myUser!.followingNumber ?? 0)"
+                    if(myUser?.profileImageURL != nil){
+                        ImagesManagerHelper.loadImageFrom(url: myUser!.profileImageURL!, imageView: self.myProfileImage)
+                    } else {
+                        ImagesManagerHelper.loadImageFrom(url: URL(string: "https://firebasestorage.googleapis.com/v0/b/owlerapp-5969b.firebasestorage.app/o/user_profiles%2Fundefined%2FprofileImage.png?alt=media&token=586d28fe-e593-45ef-9b0d-60f1be89ce08")!, imageView: self.myProfileImage)
+                    }
                     self.myPostListTableView.reloadData()
                 }
             } catch {

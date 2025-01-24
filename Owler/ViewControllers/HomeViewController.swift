@@ -23,9 +23,6 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         refreshControl.attributedTitle = NSAttributedString(string: "Recargando publicaciones...") // Texto opcional
         refreshControl.addTarget(self, action: #selector(reloadController), for: .valueChanged)
         postsListTableView.refreshControl = refreshControl
-        
-        
-        //  loadData()
     }
     
     @objc func reloadController() {

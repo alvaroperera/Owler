@@ -7,7 +7,7 @@
 
 import UIKit
 
-class UserProfileEditFormTableViewController: UITableViewController {
+class UserProfileEditFormTableViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet weak var userProfileImageView: UIImageView!
     @IBOutlet weak var userBiographyTextView: UITextView!
@@ -36,8 +36,32 @@ class UserProfileEditFormTableViewController: UITableViewController {
         return 1
     }
 
+    @IBAction func changeProfileImage(_ sender: UITapGestureRecognizer) {
+        selectImage()
+    }
     @IBAction func logOut(_ sender: Any) {
         FirebaseAuthHelper.signOut()
+    }
+    
+    func selectImage() {
+            let picker = UIImagePickerController()
+            picker.delegate = self
+            picker.sourceType = .photoLibrary
+            picker.allowsEditing = true
+            present(picker, animated: true, completion: nil)
+        }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        dismiss(animated: true, completion: nil)
+        
+        if let selectedImage = info[.editedImage] as? UIImage {
+            // Subir la imagen seleccionada
+            FirebaseStorageHelper.uploadImageToStorage(image: selectedImage)
+        }
+    }
+
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
     }
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

@@ -47,6 +47,11 @@ class PostTableViewCell: UITableViewCell {
                     }
                     authorNameLabel.attributedText = attributedString
                     postPreviewTextView.text = post.postBody
+                    if author!.profileImageURL != nil {
+                        ImagesManagerHelper.loadImageFrom(url: author!.profileImageURL!, imageView: self.authorProfilePicImageView)
+                    } else {
+                        ImagesManagerHelper.loadImageFrom(url: URL( string: "https://firebasestorage.googleapis.com/v0/b/owlerapp-5969b.firebasestorage.app/o/user_profiles%2Fundefined%2FprofileImage.png?alt=media&token=586d28fe-e593-45ef-9b0d-60f1be89ce08")!, imageView: self.authorProfilePicImageView)
+                    }
                 }
             } catch {
                 print("Error al obtener el usuario: \(error)")

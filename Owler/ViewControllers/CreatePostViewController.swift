@@ -16,6 +16,7 @@ class CreatePostViewController: UIViewController, UITextViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadData()
         postTextView.delegate = self
         // Do any additional setup after loading the view.
     }
@@ -43,5 +44,23 @@ class CreatePostViewController: UIViewController, UITextViewDelegate {
         ))
         postTextView.text = previewPostText
         dismiss(animated: true)
+    }
+    func loadData() {
+        Task {
+            do {
+                if let currentUserUid = FirebaseAuthHelper.getCurrentUserUID() {
+                    self.currentUser = try await FirebaseFirestoreHelper.getUserInfo(uid: currentUserUid)
+                    DispatchQueue.main.async{
+                        if(self.currentUser?.profileImageURL != nil){
+                            ImagesManagerHelper.loadImageFrom(url: self.currentUser!.profileImageURL!, imageView: self.userProfileImg)
+                        } else {
+                            ImagesManagerHelper.loadImageFrom(url: URL(string: "https://firebasestorage.googleapis.com/v0/b/owlerapp-5969b.firebasestorage.app/o/user_profiles%2Fundefined%2FprofileImage.png?alt=media&token=586d28fe-e593-45ef-9b0d-60f1be89ce08")!, imageView: self.userProfileImg)
+                        }
+                    }
+                }
+            } catch {
+                print("Error al obtener el usuario: \(error)")
+            }
+        }
     }
 }

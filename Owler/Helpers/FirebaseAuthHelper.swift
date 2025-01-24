@@ -53,11 +53,11 @@ class FirebaseAuthHelper {
     static func redirectToLogin() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let loginVC = storyboard.instantiateViewController(withIdentifier: "LogInViewController")
-        let navigationController = UINavigationController(rootViewController: loginVC) // Envolver en UINavigationController
+        let navigationController = UINavigationController(rootViewController: loginVC)
 
         if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
            let window = scene.windows.first {
-            window.rootViewController = navigationController // Usar el UINavigationController
+            window.rootViewController = navigationController
             UIView.transition(with: window, duration: 0.3, options: .transitionCrossDissolve, animations: nil, completion: nil)
         }
     }

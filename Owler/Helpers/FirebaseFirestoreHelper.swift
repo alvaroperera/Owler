@@ -81,24 +81,23 @@ class FirebaseFirestoreHelper {
     static func getPostsFromYourNetwork() async throws -> [Post] {
         var items: [Post] = []
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss" // Formato de la fecha
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
 
         let snapshot = try await db.collection("posts").getDocuments()
 
         do {
             items = try snapshot.documents.compactMap { document in
-                try document.data(as: Post.self) // Decodifica los documentos a `Post`
+                try document.data(as: Post.self)
             }
-
-            // Ordena los items por la fecha publicada
+            
             items.sort { post1, post2 in
                 guard
                     let date1 = dateFormatter.date(from: post1.publishedAt),
                     let date2 = dateFormatter.date(from: post2.publishedAt)
                 else {
-                    return false // No cambiar el orden si alguna fecha es inválida
+                    return false
                 }
-                return date1 > date2 // Orden ascendente (de más antigua a más reciente)
+                return date1 > date2
             }
         } catch {
             print("Error al decodificar los datos: \(error)")
@@ -148,24 +147,21 @@ class FirebaseFirestoreHelper {
     static func getPostsFromUser(uid: String) async throws -> [Post] {
         var items: [Post] = []
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss" // Formato de la fecha
-        
-        
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         let snapshot = try await db.collection("posts").whereField("authorUid", isEqualTo: uid).getDocuments()
         
         do {
             items = try snapshot.documents.compactMap { document in
-                try document.data(as: Post.self) // Decodifica los documentos a `Post`
+                try document.data(as: Post.self)
             }
-            
             items.sort { post1, post2 in
                 guard
                     let date1 = dateFormatter.date(from: post1.publishedAt),
                     let date2 = dateFormatter.date(from: post2.publishedAt)
                 else {
-                    return false // No cambiar el orden si alguna fecha es inválida
+                    return false
                 }
-                return date1 > date2 // Orden ascendente (de más antigua a más reciente)
+                return date1 > date2
             }
         } catch {
             print("Error al decodificar los datos: \(error)")
@@ -176,16 +172,13 @@ class FirebaseFirestoreHelper {
     
     static func getUserInfo(uid: String) async throws -> User {
         var user: User?
-        
         let snapshot = try await db.collection("users").document(uid).getDocument()
-        
         do {
             user = try snapshot.data(as: User.self)
         } catch {
             print("Error al decodificar los datos: \(error)")
             throw error
         }
-
         return user!
     }
     

@@ -26,7 +26,6 @@ class MyProfileViewController: UIViewController, UITableViewDataSource, UITableV
         super.viewDidLoad()
         myPostListTableView.dataSource = self
         myPostListTableView.delegate = self
-        loadMyProfileData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -70,6 +69,10 @@ class MyProfileViewController: UIViewController, UITableViewDataSource, UITableV
                 let post = myPostItems[indexPath.row]
                 let destinationVC = segue.destination as? PostDetailViewController
                 destinationVC!.post = post }
+        }
+        if segue.identifier == "goToEditMyProfile" {
+            let destinationVC = segue.destination as? UserProfileEditFormTableViewController
+            destinationVC!.user = self.myUser
         }
     }
 }

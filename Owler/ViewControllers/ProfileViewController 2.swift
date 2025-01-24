@@ -31,7 +31,6 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         super.viewDidLoad()
         userPostListTableView.dataSource = self
         userPostListTableView.delegate = self
-        loadUserProfileData()
     }
     
     override func viewWillAppear(_ animated: Bool) {

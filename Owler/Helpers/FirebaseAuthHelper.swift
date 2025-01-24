@@ -6,6 +6,7 @@
 //
 
 import FirebaseAuth
+import UIKit
 
 class FirebaseAuthHelper {
     
@@ -37,5 +38,27 @@ class FirebaseAuthHelper {
         guard let user = Auth.auth().currentUser else { return nil }
         
         return user.uid
+    }
+    
+    static func signOut() {
+        do {
+            try Auth.auth().signOut()
+            redirectToLogin()
+            
+        } catch let signOutError as NSError {
+            print("Error al cerrar sesión: \(signOutError)")
+        }
+    }
+    
+    static func redirectToLogin() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let loginVC = storyboard.instantiateViewController(withIdentifier: "LogInViewController")
+        let navigationController = UINavigationController(rootViewController: loginVC) // Envolver en UINavigationController
+
+        if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let window = scene.windows.first {
+            window.rootViewController = navigationController // Usar el UINavigationController
+            UIView.transition(with: window, duration: 0.3, options: .transitionCrossDissolve, animations: nil, completion: nil)
+        }
     }
 }

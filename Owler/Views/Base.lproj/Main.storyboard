@@ -699,7 +699,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Editar Perfil" cornerStyle="capsule"/>
                                 <connections>
-                                    <segue destination="wMC-qX-2B3" kind="show" id="gac-90-B87"/>
+                                    <segue destination="wMC-qX-2B3" kind="show" identifier="goToEditMyProfile" id="gac-90-B87"/>
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" image="birthday.cake.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="oDX-pP-x9s">
@@ -746,7 +746,7 @@
         <!--Edit Profile-->
         <scene sceneID="pNl-yK-rdn">
             <objects>
-                <tableViewController id="wMC-qX-2B3" userLabel="Edit Profile" sceneMemberID="viewController">
+                <tableViewController id="wMC-qX-2B3" userLabel="Edit Profile" customClass="UserProfileEditFormTableViewController" customModule="Owler" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="RR2-Kp-HsP">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -803,7 +803,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="393" height="62"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HUF-bY-wqB">
+                                                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HUF-bY-wqB">
                                                     <rect key="frame" x="181" y="14" width="192" height="34"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -826,7 +826,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="393" height="62"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1z2-kq-3sh">
+                                                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1z2-kq-3sh">
                                                     <rect key="frame" x="124" y="14" width="249" height="34"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -901,6 +901,9 @@
                                                     <color key="tintColor" red="0.64738495760000003" green="0.20877688180000001" blue="0.16346966230000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <state key="normal" title="Button"/>
                                                     <buttonConfiguration key="configuration" style="plain" title="Cerrar sesión"/>
+                                                    <connections>
+                                                        <action selector="logOut:" destination="wMC-qX-2B3" eventType="touchUpInside" id="ps4-md-zQf"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -923,6 +926,14 @@
                             </button>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="userBiographyTextView" destination="vhj-DI-tNs" id="eqe-h5-DjM"/>
+                        <outlet property="userBirthdayDatePicker" destination="XZd-5c-UQy" id="w2a-DF-UCa"/>
+                        <outlet property="userBirthdayDisplaySwitch" destination="l7d-8f-sPP" id="Au3-hk-570"/>
+                        <outlet property="userNameTextField" destination="1z2-kq-3sh" id="m5u-32-mUA"/>
+                        <outlet property="userProfileImageView" destination="voA-PY-cWw" id="n9o-zo-esC"/>
+                        <outlet property="userUsernameTextField" destination="HUF-bY-wqB" id="I3S-Ak-vQX"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Krk-0m-AzF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1062,6 +1073,7 @@
                                             <outlet property="authorNameLabel" destination="cHL-oT-pEY" id="Wmd-2b-NDu"/>
                                             <outlet property="authorProfilePicImageView" destination="k3y-my-CiB" id="byP-Vv-M1j"/>
                                             <outlet property="postPreviewTextView" destination="ZP4-MX-RmN" id="mgA-gQ-dG8"/>
+                                            <segue destination="Jqh-h0-BNb" kind="show" identifier="goToPostDetailFromUserProfile" id="qXc-Ov-opA"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

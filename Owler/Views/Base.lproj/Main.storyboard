@@ -288,7 +288,6 @@
                         <segue destination="0zQ-Mh-5VU" kind="relationship" relationship="viewControllers" id="IaH-fF-v5I"/>
                         <segue destination="x5h-Jx-EbU" kind="relationship" relationship="viewControllers" id="uQR-RB-J3L"/>
                         <segue destination="DaQ-P7-UKf" kind="relationship" relationship="viewControllers" id="rcl-CM-NDW"/>
-                        <segue destination="Mtu-4w-j0z" kind="relationship" relationship="viewControllers" id="lmz-b1-Jk9"/>
                         <segue destination="Nbn-kN-pxg" kind="relationship" relationship="viewControllers" id="lb8-Xc-nD0"/>
                     </connections>
                 </tabBarController>
@@ -416,7 +415,16 @@
                             <constraint firstItem="0ti-mR-84X" firstAttribute="trailing" secondItem="bkn-um-ecb" secondAttribute="trailing" id="eQE-lP-fVQ"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Principal" style="browser" id="oA2-PI-yQr"/>
+                    <navigationItem key="navigationItem" title="Principal" style="browser" id="oA2-PI-yQr">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="Bog-AQ-SYm">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="6s7-Oo-qhg">
+                                <rect key="frame" x="317.66666666666669" y="5" width="59.333333333333314" height="34.333333333333336"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="bell.fill" catalog="system" title="0"/>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="postsListTableView" destination="0ti-mR-84X" id="s6H-lh-3pD"/>
@@ -592,11 +600,11 @@
             </objects>
             <point key="canvasLocation" x="784" y="2689"/>
         </scene>
-        <!--Notificaciones-->
+        <!--Buscar-->
         <scene sceneID="OE6-Jz-7do">
             <objects>
                 <navigationController id="DaQ-P7-UKf" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Notificaciones" image="bell.fill" catalog="system" id="gNK-WJ-GoJ"/>
+                    <tabBarItem key="tabBarItem" title="Buscar" image="magnifyingglass" catalog="system" id="gNK-WJ-GoJ"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="gcd-P7-LNR">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -608,52 +616,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CCL-w4-mFP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="784" y="1955"/>
-        </scene>
-        <!--Mensajes-->
-        <scene sceneID="O5h-h4-z6y">
-            <objects>
-                <tableViewController id="ijA-fk-Yoq" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="iH6-cz-QAH">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="inw-VM-HXe">
-                                <rect key="frame" x="0.0" y="50" width="393" height="43.666667938232422"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="inw-VM-HXe" id="YW1-g7-rPu">
-                                    <rect key="frame" x="0.0" y="0.0" width="393" height="43.666667938232422"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="ijA-fk-Yoq" id="uYA-Es-4AH"/>
-                            <outlet property="delegate" destination="ijA-fk-Yoq" id="DLf-lI-ERY"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Mensajes" id="eIe-ca-GSS"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="UaC-r7-VZw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1479" y="2689"/>
-        </scene>
-        <!--Mensajes-->
-        <scene sceneID="FAP-Ml-ymL">
-            <objects>
-                <navigationController id="Mtu-4w-j0z" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Mensajes" image="message.fill" catalog="system" id="Nu7-GO-x6s"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="qmg-Hc-fuX">
-                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="ijA-fk-Yoq" kind="relationship" relationship="rootViewController" id="9MJ-gc-xl0"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="n18-zG-ELL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1479" y="1955"/>
         </scene>
         <!--Ajustes-->
         <scene sceneID="wbb-Vo-z3v">
@@ -682,7 +644,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bgz-lH-JNh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2192" y="2689"/>
+            <point key="canvasLocation" x="1466" y="2689"/>
         </scene>
         <!--Ajustes-->
         <scene sceneID="i7G-cI-HZD">
@@ -699,7 +661,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZoS-bA-jLY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2192" y="1955"/>
+            <point key="canvasLocation" x="1466" y="1955"/>
         </scene>
         <!--My Profile-->
         <scene sceneID="feX-cR-cAO">
@@ -1297,7 +1259,7 @@
         <image name="birthday.cake.fill" catalog="system" width="128" height="115"/>
         <image name="gearshape.fill" catalog="system" width="128" height="123"/>
         <image name="house.fill" catalog="system" width="128" height="104"/>
-        <image name="message.fill" catalog="system" width="128" height="114"/>
+        <image name="magnifyingglass" catalog="system" width="128" height="117"/>
         <image name="person.fill" catalog="system" width="128" height="120"/>
         <image name="person.fill.badge.plus" catalog="system" width="128" height="126"/>
         <image name="square.and.pencil" catalog="system" width="128" height="121"/>

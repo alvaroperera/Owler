@@ -68,6 +68,29 @@ class MyProfileViewController: UIViewController, UITableViewDataSource, UITableV
             }
         }
     }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+           // Crear la acción de eliminar
+           let deleteAction = UIContextualAction(style: .destructive, title: "Eliminar") { _, _, completionHandler in
+               
+               // 1. Obtén el ID del documento que deseas eliminar
+               
+               // 2. Llama a Firestore para eliminar el documento
+               FirebaseFirestoreHelper.deletePost(postID: self.myPostItems[indexPath.row].postId!)
+               
+               self.myPostItems.remove(at: indexPath.row)
+               self.myPostListTableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
+               
+               // Notifica que la acción se completó
+               completionHandler(true)
+               self.loadMyProfileData()
+           }
+           
+           // Devuelve la configuración de swipe con la acción de eliminar
+           let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
+           return configuration
+       }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToPostDetailFromMyProfile" {
             if let indexPath = self.myPostListTableView.indexPathForSelectedRow {

@@ -25,7 +25,7 @@ class UserProfileEditFormTableViewController: UITableViewController, UIImagePick
     }
 
     // MARK: - Table view data source
-
+/*
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 3
@@ -35,7 +35,7 @@ class UserProfileEditFormTableViewController: UITableViewController, UIImagePick
         // #warning Incomplete implementation, return the number of rows
         return 1
     }
-
+*/
     @IBAction func changeProfileImage(_ sender: UITapGestureRecognizer) {
         selectImage()
     }

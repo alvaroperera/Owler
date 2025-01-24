@@ -182,6 +182,17 @@ class FirebaseFirestoreHelper {
         return user!
     }
     
+    static func deletePost(postID: String) {
+        db.collection("posts").document(postID).delete { error in
+            if let error = error {
+                print("Error eliminando el documento: \(error.localizedDescription)")
+            } else {
+                print("Documento eliminado correctamente.")
+
+            }
+        }
+    }
+    
     static func saveProfileImageURL(url: String) {
         guard let userID = FirebaseAuthHelper.getCurrentUserUID() else { return }
         

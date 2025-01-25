@@ -14,9 +14,6 @@ struct User: Codable {
     var email: String
     var birthday: String
     var biography: String?
-    var followersNumber: Int?
-    var followingNumber: Int?
-    var postsNumber: Int?
     var createdAt: String?
     var profileImageURL: URL?
 }

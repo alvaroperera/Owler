@@ -46,9 +46,9 @@ class SignInViewController: UIViewController, UIGestureRecognizerDelegate {
             view.addGestureRecognizer(tap)
         }
         
-        @objc func dismissKeyboard() {
-            view.endEditing(true)
-        }
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
     
     func showLoginError(error: Error) {
         // Configura el mensaje de error

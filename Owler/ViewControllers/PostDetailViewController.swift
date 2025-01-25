@@ -8,9 +8,8 @@
 import UIKit
 class PostDetailViewController: UIViewController {
     
-    @IBOutlet weak var authorNameLabell: UILabel!
+    @IBOutlet weak var authorNameLabel: UILabel!
     @IBOutlet weak var authorProfileImageView: UIImageView!
-    @IBOutlet weak var authorUsernameLabel: UILabel!
     @IBOutlet weak var postTextView: UITextView!
     
     var post: Post?
@@ -36,8 +35,18 @@ class PostDetailViewController: UIViewController {
                 self.author = try await FirebaseFirestoreHelper.getUserInfo(uid: post!.authorUid )
                 
                 DispatchQueue.main.async { [self] in
-                    authorNameLabell.text = author?.name
-                    authorUsernameLabel.text = "@\(author?.username ?? "")"
+                    let authorInfoString = "\(author!.name) @\(author!.username)"
+                    let attributedString = NSMutableAttributedString(string: authorInfoString)
+                    
+                    let boldFont = UIFont.boldSystemFont(ofSize: authorNameLabel.font.pointSize)
+                    let boldAttributes: [NSAttributedString.Key: Any] = [
+                        .font: boldFont
+                    ]
+                    if let boldRange = authorInfoString.range(of: author!.name) {
+                        let nsRange = NSRange(boldRange, in: authorInfoString)
+                        attributedString.addAttributes(boldAttributes, range: nsRange)
+                    }
+                    authorNameLabel.attributedText = attributedString
                     if(author?.profileImageURL != nil){
                         ImagesManagerHelper.loadImageFrom(url: author!.profileImageURL!, imageView: self.authorProfileImageView)
                     } else {

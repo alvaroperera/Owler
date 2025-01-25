@@ -144,6 +144,25 @@ class FirebaseFirestoreHelper {
         return snapshot.count > 0
     }
     
+    static func getUsersByUsername(username: String) async throws -> [User] {
+        var items: [User] = []
+        
+        let snapshot = try await db.collection("users").whereField("name", isEqualTo: username).getDocuments()
+        
+        do {
+            
+        }
+        return items
+    }
+    
+    static func updateUser(user: User) {
+        do{
+            try db.collection("users").document(user.uid!).setData(from: user)
+        } catch {
+            print("Error al actualizar el usuario")
+        }
+    }
+    
     static func getPostsFromUser(uid: String) async throws -> [Post] {
         var items: [Post] = []
         let dateFormatter = DateFormatter()

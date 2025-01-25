@@ -21,6 +21,8 @@ class MyProfileViewController: UIViewController, UITableViewDataSource, UITableV
     var myPostItems: [Post] = []
     var myUser: User?
     var myPosts: Int?
+    var myFollowers: Int?
+    var myFollowing: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,13 +51,15 @@ class MyProfileViewController: UIViewController, UITableViewDataSource, UITableV
                 self.myUser = try await FirebaseFirestoreHelper.getUserInfo(uid: FirebaseAuthHelper.getCurrentUserUID()! )
                 self.myPosts = try await FirebaseFirestoreHelper.getNumberOfPosts(uid: FirebaseAuthHelper.getCurrentUserUID()!)
                 self.myPostItems = try await FirebaseFirestoreHelper.getPostsFromUser(uid: FirebaseAuthHelper.getCurrentUserUID()!)
+                self.myFollowers = try await FirebaseFirestoreHelper.getNumberOfFollowers(uid: FirebaseAuthHelper.getCurrentUserUID()!)
+                self.myFollowing = try await FirebaseFirestoreHelper.getNumberOfFollows(uid: FirebaseAuthHelper.getCurrentUserUID()!)
                 DispatchQueue.main.async { [self] in
                     myName.text = myUser?.name
                     myUsername.text = "@\(myUser!.username)"
                     myBiography.text = myUser?.biography
                     myPostsNumber.text = "\(myPosts ?? 0)"
-                    myFollowersNumber.text = "\(myUser!.followersNumber ?? 0)"
-                    myFollowingNumber.text = "\(myUser!.followingNumber ?? 0)"
+                    myFollowersNumber.text = "\(myFollowers ?? 0)"
+                    myFollowingNumber.text = "\(myFollowing ?? 0)"
                     if(myUser?.profileImageURL != nil){
                         ImagesManagerHelper.loadImageFrom(url: myUser!.profileImageURL!, imageView: self.myProfileImage)
                     } else {

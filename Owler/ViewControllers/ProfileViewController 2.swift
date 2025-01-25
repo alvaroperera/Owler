@@ -50,7 +50,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     
-    
+    /*
     @IBAction func followOrUnfollow(_ sender: UIButton) {
         print(self.isFollow as Any)
         if (self.isFollow ?? false == false ){
@@ -70,7 +70,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             }
         }
         loadUserProfileData()
-    }
+    }*/
     
     func loadUserProfileData() {
         Task {
@@ -80,15 +80,15 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
                 self.userFollows = try await FirebaseFirestoreHelper.getNumberOfFollows(uid: self.userUid!)
                 self.userFollowers = try await FirebaseFirestoreHelper.getNumberOfFollowers(uid: self.userUid!)
                 self.userPostItems = try await FirebaseFirestoreHelper.getPostsFromUser(uid: self.userUid!)
-                self.isFollow = try await FirebaseFirestoreHelper.isFollowingUser(uid: FirebaseAuthHelper.getCurrentUserUID()!, followedUid: self.userUid!)
+                //self.isFollow = try await FirebaseFirestoreHelper.isFollowingUser(uid: FirebaseAuthHelper.getCurrentUserUID()!, followedUid: self.userUid!)
                 print(self.isFollow as Any)
                 DispatchQueue.main.async { [self] in
                     userName.text = user?.name
                     userUserName.text = "@\(user!.username)"
                     userBiography.text = user?.biography
                     userPostsNumber.text = "\(userPosts ?? 0)"
-                    userFollowersNumber.text = "\(user!.followersNumber ?? 0)"
-                    userFollowingNumber.text = "\(user!.followingNumber ?? 0)"
+                    userFollowersNumber.text = "\(userFollowers ?? 0)"
+                    userFollowingNumber.text = "\(userFollows ?? 0)"
                     if(user?.profileImageURL != nil){
                         ImagesManagerHelper.loadImageFrom(url: user!.profileImageURL!, imageView: self.userProfileImage)
                     } else {

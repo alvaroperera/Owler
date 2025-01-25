@@ -65,11 +65,14 @@ class UserProfileEditFormTableViewController: UITableViewController, UIImagePick
     func loadMyProfileData() {
         Task {
             do {
+                let formatter = DateFormatter()
+                formatter.dateFormat = "yyyy-MM-dd"
                 self.user = try await FirebaseFirestoreHelper.getUserInfo(uid: FirebaseAuthHelper.getCurrentUserUID()! )
                 DispatchQueue.main.async { [self] in
                     userNameTextField.text = user?.name
                     userUsernameTextField.text = "\(user!.username)"
-                    userBiographyTextView.text = user?.biography
+                    userBiographyTextView.text = user?.biography ?? "Esta será tu biografía. Toca aquí para editarla y cuenta algo sobre ti"
+                    userBirthdayDatePicker.date = formatter.date(from: user!.birthday)!
                     if(user?.profileImageURL != nil){
                         ImagesManagerHelper.loadImageFrom(url: user!.profileImageURL!, imageView: self.userProfileImageView)
                     } else {

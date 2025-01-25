@@ -842,6 +842,7 @@
                     <navigationItem key="navigationItem" title="Mi perfil" id="z4p-oJ-hXL"/>
                     <connections>
                         <outlet property="myBiography" destination="C0Q-9T-zOU" id="kus-ea-bby"/>
+                        <outlet property="myBirthday" destination="0RY-4B-PaN" id="gsf-ZU-d24"/>
                         <outlet property="myFollowersNumber" destination="GSc-KF-gaC" id="SqK-st-ZVU"/>
                         <outlet property="myFollowingNumber" destination="utR-UJ-PaK" id="dQy-YR-85m"/>
                         <outlet property="myName" destination="SRk-fT-C9e" id="ZWP-eh-4kX"/>
@@ -1241,6 +1242,7 @@
                     <connections>
                         <outlet property="followButton" destination="SbT-xf-pUq" id="hVC-z7-h2T"/>
                         <outlet property="userBiography" destination="h3C-ko-nBN" id="7xX-ij-6Yo"/>
+                        <outlet property="userBirthday" destination="Eeg-Iw-wOZ" id="PPm-bM-Rhk"/>
                         <outlet property="userFollowersNumber" destination="Czp-UN-mi4" id="5YT-Tt-r9i"/>
                         <outlet property="userFollowingNumber" destination="AK8-7y-UXF" id="0ei-tx-BKf"/>
                         <outlet property="userName" destination="YqU-B8-cmd" id="QOD-mg-ZXc"/>

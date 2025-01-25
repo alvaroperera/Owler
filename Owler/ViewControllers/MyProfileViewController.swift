@@ -17,6 +17,7 @@ class MyProfileViewController: UIViewController, UITableViewDataSource, UITableV
     @IBOutlet weak var myFollowingNumber: UILabel!
     @IBOutlet weak var myProfileImage: UIImageView!
     @IBOutlet weak var myPostListTableView: UITableView!
+    @IBOutlet weak var myBirthday: UILabel!
     
     var myPostItems: [Post] = []
     var myUser: User?
@@ -53,6 +54,8 @@ class MyProfileViewController: UIViewController, UITableViewDataSource, UITableV
                 self.myPostItems = try await FirebaseFirestoreHelper.getPostsFromUser(uid: FirebaseAuthHelper.getCurrentUserUID()!)
                 self.myFollowers = try await FirebaseFirestoreHelper.getNumberOfFollowers(uid: FirebaseAuthHelper.getCurrentUserUID()!)
                 self.myFollowing = try await FirebaseFirestoreHelper.getNumberOfFollows(uid: FirebaseAuthHelper.getCurrentUserUID()!)
+                let birthdayText = OwlerToolsHelper.dateFullTextString(fechaEnString: (myUser?.birthday)!)
+                
                 DispatchQueue.main.async { [self] in
                     myName.text = myUser?.name
                     myUsername.text = "@\(myUser!.username)"
@@ -60,6 +63,7 @@ class MyProfileViewController: UIViewController, UITableViewDataSource, UITableV
                     myPostsNumber.text = "\(myPosts ?? 0)"
                     myFollowersNumber.text = "\(myFollowers ?? 0)"
                     myFollowingNumber.text = "\(myFollowing ?? 0)"
+                    myBirthday.text = birthdayText
                     if(myUser?.profileImageURL != nil){
                         ImagesManagerHelper.loadImageFrom(url: myUser!.profileImageURL!, imageView: self.myProfileImage)
                     } else {

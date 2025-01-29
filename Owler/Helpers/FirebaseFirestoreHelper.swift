@@ -147,10 +147,18 @@ class FirebaseFirestoreHelper {
     static func getUsersByUsername(username: String) async throws -> [User] {
         var items: [User] = []
         
-        let snapshot = try await db.collection("users").whereField("name", isEqualTo: username).getDocuments()
-        
+        let snapshot = try await db.collection("users")
+            .order(by: "username")
+            .start(at: [username])
+            .end(at: ["\(username)\u{f8ff}"])
+            .getDocuments()
         do {
-            
+            items = try snapshot.documents.compactMap { document in
+                try document.data(as: User.self)
+            }
+        } catch {
+            print("Error al decodificar los datos: \(error)")
+            throw error
         }
         return items
     }
